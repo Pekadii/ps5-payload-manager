@@ -1,7 +1,7 @@
 #pragma once
 
 /* Network Settings */
-#define MENU_PORT 50005
+#define MENU_PORT 8084
 #define ELFLDR_PORT 9021
 
 /* Routes */
@@ -17,10 +17,13 @@
 #define ROUTE_GETIP "/getip"
 #define ROUTE_CONFIG "/get_config"
 
-#define MENU_VERSION "1.0.1-native"
+#define MENU_VERSION "1.0.2-native"
 
 /* Logging */
 void nm_log(const char *fmt, ...);
+
+#include "notification.h"
+#include "utils.h"
 
 /* Paths */
 #define BASE_DATA_DIR "/data/next_menu"

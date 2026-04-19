@@ -11,7 +11,7 @@ INCLUDES := -Iinclude -I$(TARGET)/include
 LIBS     := -L$(TARGET)/lib -lmicrohttpd
 
 # Source Files
-SRCS := src/main.c src/payload_mgr.c src/ps5_launcher.c
+SRCS := src/main.c src/payload_mgr.c src/ps5_launcher.c src/notification.c src/utils.c
 OBJS := $(SRCS:.c=.o)
 ELF  := next_menu.elf
 

@@ -244,7 +244,7 @@ const ExecutionList = ({ payloads, loading, refreshPayloads, onLoad, onDelete })
 const StorageHub = ({ ip, uploading, handleFileUpload, remotePayloads, payloads, onDelete, onInstall }) => {
   const [subView, setSubView] = useState('menu') // menu, repo, remove
   const isPS5 = navigator.userAgent.includes("PlayStation")
-  const displayPort = window.location.port || "50005"
+  const displayPort = window.location.port || "8084"
   const displayHost = (window.location.hostname && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') 
     ? window.location.hostname 
     : ip

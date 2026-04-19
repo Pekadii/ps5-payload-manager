@@ -225,8 +225,11 @@ static enum MHD_Result on_request(void *cls, struct MHD_Connection *conn,
         resp = MHD_create_response_from_buffer(strlen(MENU_VERSION), (void *)MENU_VERSION, MHD_RESPMEM_PERSISTENT);
         MHD_add_response_header(resp, "Content-Type", "text/plain");
     } else if (strcmp(url, ROUTE_GETIP) == 0) {
-        const char *ip = "192.168.1.133"; /* Placeholder */
-        resp = MHD_create_response_from_buffer(strlen(ip), (void *)ip, MHD_RESPMEM_PERSISTENT);
+        char ip[64];
+        if (nm_get_local_ip(ip, sizeof(ip)) != 0) {
+            strcpy(ip, "0.0.0.0");
+        }
+        resp = MHD_create_response_from_buffer(strlen(ip), (void *)ip, MHD_RESPMEM_MUST_COPY);
         MHD_add_response_header(resp, "Content-Type", "text/plain");
     } else if (strcmp(url, ROUTE_CONFIG) == 0) {
         const char *config = "{\"AUTOLOAD_ENABLED\":false}";
@@ -269,6 +272,13 @@ int main(int argc, char *argv[]) {
     }
 
     nm_log("[NextMenu] Server is running. Visit /shutdown to exit.\n");
+
+    /* Startup Notification */
+    char ip[64];
+    if (nm_get_local_ip(ip, sizeof(ip)) != 0) {
+        strcpy(ip, "unknown");
+    }
+    nm_notify("Next Menu v%s\nIP: %s\nPort: %d", MENU_VERSION, ip, port);
 
     /* Keep the daemon running until keep_running is 0 */
     while (keep_running) {

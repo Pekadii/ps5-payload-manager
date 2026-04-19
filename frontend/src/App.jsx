@@ -907,18 +907,39 @@ function App() {
     }
     init()
 
-    const statusInterval = setInterval(async () => {
-      const status = await api('/autoload_status')
-      if (status) setAutoloadStatus(status)
-    }, 1000)
+    let statusTimeout;
+    const pollStatus = async () => {
+      const status = await api('/autoload_status');
+      
+      if (status) {
+        setAutoloadStatus(status);
+        
+        /* 
+           Only continue polling if:
+           1. Autoload is active (remaining >= 0)
+           2. Autoload is finished but not cleared (current === 'DONE')
+        */
+        if (status.remaining >= 0 || status.current === 'DONE') {
+          statusTimeout = setTimeout(pollStatus, 1000);
+        } else {
+          /* status.remaining is -1, which means it's idle. Stop polling. */
+          console.log("[Autoload] Sequence idle, stopping poll.");
+        }
+      } else {
+        /* On error, retry after 5s just in case server is booting */
+        statusTimeout = setTimeout(pollStatus, 5000);
+      }
+    };
 
     const logInterval = setInterval(async () => {
       const logData = await api('/log')
       if (logData?.logs) setLogs(logData.logs)
-    }, 1500)
+    }, 2000) // Slightly slower log polling too
+
+    pollStatus(); // Start polling
 
     return () => { 
-      clearInterval(statusInterval)
+      clearTimeout(statusTimeout)
       clearInterval(logInterval)
     }
   }, [])

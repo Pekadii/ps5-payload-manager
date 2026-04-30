@@ -4,7 +4,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import { cn, isPS5, isSystemPayload } from '../../utils/helpers'
 import PayloadName from '../ui/PayloadName'
 
-const StorageHub = ({ payloads, onInstall, onDelete, onUpload, onImportFromUsb, ip, scrollTarget, onClearScrollTarget }) => {
+const StorageHub = ({ payloads, onInstall, onDelete, onUpload, onImportFromUsb, config, ip, scrollTarget, onClearScrollTarget }) => {
   const [remotePayloads, setRemotePayloads] = useState([])
   const [repoUrl, setRepoUrl] = useState('')
   const [loading, setLoading] = useState(false)
@@ -245,9 +245,24 @@ const StorageHub = ({ payloads, onInstall, onDelete, onUpload, onImportFromUsb, 
 
         <div className={cn("grid gap-4", isPS5 ? "grid-cols-2" : "grid-cols-1")}>
           {payloads.filter(p => p.includes('/mnt/usb')).length === 0 ? (
-            <div className="col-span-full py-20 border-2 border-dashed border-white/5 rounded-ps-3xl flex flex-col items-center justify-center space-y-4 bg-white/[0.01]">
-              <HardDrive className="w-16 h-16 text-white/5" />
-              <p className="text-zinc-500 font-bold uppercase tracking-widest text-sm italic">No USB Payloads Found</p>
+            <div className="col-span-full py-20 border-2 border-dashed border-white/5 rounded-ps-3xl flex flex-col items-center justify-center space-y-6 bg-white/[0.01]">
+              <div className="relative">
+                <HardDrive className="w-16 h-16 text-white/5" />
+                {!config.SCAN_USB_PAYLOADS && (
+                  <div className="absolute -top-1 -right-1 bg-amber-500/20 rounded-full p-1 border border-amber-500/50">
+                    <AlertTriangle className="w-4 h-4 text-amber-500" />
+                  </div>
+                )}
+              </div>
+              <div className="text-center space-y-2">
+                <p className="text-zinc-500 font-bold uppercase tracking-widest text-sm italic">No USB Payloads Found</p>
+                {!config.SCAN_USB_PAYLOADS && (
+                  <p className="text-xs text-zinc-600 max-w-xs mx-auto leading-relaxed">
+                    Extended USB scanning is currently disabled. <br /> 
+                    Enable <strong>"Scan USB Payloads"</strong> in settings to search for payloads on connected drives.
+                  </p>
+                )}
+              </div>
             </div>
           ) : (
             payloads.filter(p => p.includes('/mnt/usb')).map((path, i) => {

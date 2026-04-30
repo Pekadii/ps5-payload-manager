@@ -482,6 +482,7 @@ function App() {
               onDelete={handleDelete}
               onUpload={handleUpload}
               onImportFromUsb={handleImportFromUsb}
+              config={config}
               ip={ip}
               scrollTarget={storageScrollTarget}
               onClearScrollTarget={() => setStorageScrollTarget(null)}

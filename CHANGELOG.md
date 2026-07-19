@@ -1,3 +1,14 @@
+## v0.4.1
+
+### 🚀 Features & UX Improvements
+* **Translations**: Updated existing translations and added new languages.
+* **New Languages**:
+  * **Italian** (thanks to Leon90)
+  * **Portuguese (Brazilian)** (thanks to matmarson, slipttees, marcusvrb)
+  * **Russian** (thanks to Akela-1979)
+
+**Full Changelog**: [v0.4.0...v0.4.1](https://github.com/itsPLK/ps5-payload-manager/compare/v0.4.0...v0.4.1)
+
 ## v0.4.0
 
 ### 🚀 Features & UX Improvements

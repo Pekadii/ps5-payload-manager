@@ -6,6 +6,10 @@
 <p align="center">A modern, web-based dashboard to easily manage, import, and automatically load payloads on your PS5.</p>
 
 <p align="center">
+  <a href="https://crowdin.com/project/ps5-payload-manager"><img src="https://badges.crowdin.net/ps5-payload-manager/localized.svg" alt="Crowdin"></a>
+</p>
+
+<p align="center">
  <img src="./pldmgr_screenshot.png" width="600" />
 </p>
 
@@ -35,6 +39,11 @@ You can also manually load the manager like any other `.elf` file. Grab the late
 
 ## Custom Repositories
 You can add third-party payload repositories to the manager. To learn how to create your own repository JSON and host it, see the [Custom Repositories Guide](CUSTOM_REPOSITORIES.md).
+
+## Translations
+PS5 Payload Manager supports multiple languages thanks to the community! 
+If you'd like to help translate the app into your native language or improve existing translations, please visit our [Crowdin project](https://crowdin.com/project/ps5-payload-manager). 
+All translations are managed exclusively through Crowdin.
 
 ## Credits
 - [John Törnblom](https://github.com/john-tornblom) - for the [shell UI installer](https://github.com/ps5-payload-dev/ftpsrv/blob/master/install-ps5.c) and various payloads used as reference.

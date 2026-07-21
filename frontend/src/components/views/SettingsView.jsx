@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Terminal, ChevronRight, Globe, Languages, Wrench } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { cn } from '../../utils/helpers'
-import LauncherManager from '../LauncherManager'
+import LauncherManager from './LauncherManager'
 
 const FOLLOW_BROWSER_LANGUAGE = '__auto__'
 

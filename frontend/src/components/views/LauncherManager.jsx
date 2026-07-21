@@ -11,7 +11,7 @@ import {
   Wrench
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { cn } from '../utils/helpers'
+import { cn } from '../../utils/helpers'
 
 const StatusBadge = ({ ready, loading, text }) => (
   <span

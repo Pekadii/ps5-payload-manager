@@ -22,11 +22,49 @@
 </p>
 
 ## Features
-- **Web-Based Interface**: A modern dashboard to manage payloads from your PC, phone, or the PS5 itself.
-- **Import Payloads**: Easily add new payloads from a USB drive or download them from the cloud repository.
-- **Automated Startup**: Set up a list of payloads to load automatically whenever you start the manager.
-- **Home Screen Shortcut**: Installs a dedicated "Payload Manager" app icon to your PS5 home screen for quick access.
-- **Auto-Close Disc Player**: Optional setting to automatically close the Disc Player on startup (useful for BD-JB users).
+- **Web-Based Interface**: A modern dashboard to manage payloads from your PC, phone, or directly on the PS5.
+- **Import Payloads**: Easily add new payloads from a USB drive or download them from the integrated cloud repository.
+- **Automated Startup**: Configure payloads to launch automatically whenever Payload Manager starts.
+- **Home Screen Shortcut**: Installs a dedicated **Payload Manager** app icon on the PS5 Home Screen for one-click access.
+- **Launcher Manager** *(New)*: Verify, repair, or reinstall the Payload Manager Home Screen launcher directly from **Settings → System Tools**.
+- **Launcher Diagnostics** *(New)*: Check the status of launcher files (`param.json` and `icon0.png`) and verify whether the launcher installation is healthy.
+- **Remote Launcher Recovery** *(New)*: Restore a missing Payload Manager launcher from any web browser (PC or phone) without using FTP or manually editing the PS5 database.
+- **Auto-Close Disc Player**: Optional setting to automatically terminate the Disc Player on startup (recommended for BD-JB users).
+
+## Backend Endpoints
+
+- `GET /launcher_status`
+- `POST /launcher_repair`
+- `POST /launcher_reinstall`
+
+## Tested
+Tested on:
+
+- **PS5 firmware:** 11.20
+- **Payload Manager base:** v0.4.2
+- **Custom build:** v0.4.3 development build
+- **Access methods:** PS5 browser and remote phone browser
+- **Frontend build:** `npm run build`
+- **Full ELF build:** `make clean all`
+
+Verified functionality:
+
+- Launcher Manager loads under **Settings → System Tools**
+- `GET /launcher_status` returns valid launcher status data
+- Missing `param.json` and `icon0.png` are detected
+- Deleting the Payload Manager Home Screen shortcut is detected as a missing launcher
+- Payload Manager remains remotely accessible at `http://PS5_IP:8084`
+- **Repair** recreates the launcher files
+- **Repair** restores the Payload Manager shortcut to the PS5 Home Screen
+- Status automatically returns to **Ready** after a successful repair
+- Existing Dashboard, Manage Payloads, Autoload, Active Processes, and Settings pages continue to load normally
+
+## Known limitations
+
+- PS5 shell registration is displayed as **Unknown** because the available SDK does not provide a reliable read-only registration query.
+- The **Verify** action refreshes the launcher status but currently provides limited visual feedback when no status change occurs.
+- The repair workflow was tested successfully after deleting the launcher. The destructive **Reinstall** workflow should receive additional testing before release.
+
 
 
 ## Installation

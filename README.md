@@ -10,7 +10,15 @@
 </p>
 
 <p align="center">
- <img src="./pldmgr_screenshot.png" width="600" />
+ <img src="./pldmgr_screenshot1.png" width="600" />
+</p>
+
+<p align="center">
+ <img src="./pldmgr_screenshot2.png" width="600" />
+</p>
+
+<p align="center">
+ <img src="./pldmgr_screenshot3.png" width="600" />
 </p>
 
 ## Features

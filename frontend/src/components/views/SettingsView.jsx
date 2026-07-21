@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Terminal, ChevronRight, Globe, Languages, Wrench } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { cn } from '../../utils/helpers'
-import LauncherManager from './LauncherManager'
+import LauncherRecovery from './LauncherRecovery'
 
 const FOLLOW_BROWSER_LANGUAGE = '__auto__'
 
@@ -285,7 +285,7 @@ const SettingsView = ({ config, onSaveConfig, setShowLogs, onNavigate }) => {
           <span>{t("settings.system_tools_title", "System Tools")}</span>
         </h3>
 
-        <LauncherManager />
+        <LauncherRecovery />
       </section>
 
       {/* Diagnostics */}

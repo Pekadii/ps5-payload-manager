@@ -167,20 +167,6 @@ int pldmgr_repair_app(void) {
   pldmgr_notify("Payload Manager launcher repaired");
   return 0;
 }
-
-int pldmgr_reinstall_app(void) {
-  int err = sceAppInstUtilInitialize();
-  if (err) return -1;
-  err = sceAppInstUtilAppUnInstall("PLDM00001");
-  sceAppInstUtilTerminate();
-  if (err)
-    pldmgr_log("[PLDMGR] Launcher uninstall returned 0x%08X; continuing.\n", err);
-
-  remove("/user/app/PLDM00001/sce_sys/param.json");
-  remove("/user/app/PLDM00001/sce_sys/icon0.png");
-  return pldmgr_install_app_if_needed();
-}
-
 int pldmgr_install_app_if_needed(void) {
   const char *title_id = "PLDM00001";
   char base_dir[256];

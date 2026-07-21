@@ -109,6 +109,39 @@ function App() {
     setToasts(prev => prev.filter(t => t.id !== id))
   }
 
+useEffect(() => {
+    const checkLauncher = async () => {
+        try {
+            const res = await fetch('/launcher_status', {
+                cache: 'no-store'
+            })
+
+            if (!res.ok) return
+
+            const status = await res.json()
+
+            if (status.status !== 'ready') {
+                const warningKey = 'launcher-recovery-warning-shown'
+
+                if (sessionStorage.getItem(warningKey) === '1') {
+                    return
+                }
+
+                sessionStorage.setItem(warningKey, '1')
+
+                addToast(
+                    'Payload Manager launcher needs attention. Open Settings → System Tools → Launcher Recovery.',
+                    'error'
+                )
+            }
+        } catch (e) {
+            console.warn('Launcher startup verification failed:', e)
+        }
+    }
+
+    checkLauncher()
+}, [])
+
   const api = async (endpoint, options = {}) => {
     try {
       const response = await fetch(endpoint, options)

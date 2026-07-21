@@ -624,17 +624,6 @@ enum MHD_Result http_on_request(void *cls, struct MHD_Connection *conn,
         MHD_add_response_header(resp, "Content-Type", "application/json");
         add_cors_headers(resp);
         return MHD_queue_response(conn, rc == 0 ? MHD_HTTP_OK : MHD_HTTP_INTERNAL_SERVER_ERROR, resp);
-    } else if (strcmp(url, ROUTE_LAUNCHER_REINSTALL) == 0) {
-        int rc = pldmgr_reinstall_app();
-        char json[256];
-        snprintf(json, sizeof(json),
-                 "{\"ok\":%s,\"action\":\"reinstall\",\"message\":\"%s\"}",
-                 rc == 0 ? "true" : "false",
-                 rc == 0 ? "Launcher reinstalled" : "Launcher reinstall failed");
-        resp = MHD_create_response_from_buffer(strlen(json), (void *)json, MHD_RESPMEM_MUST_COPY);
-        MHD_add_response_header(resp, "Content-Type", "application/json");
-        add_cors_headers(resp);
-        return MHD_queue_response(conn, rc == 0 ? MHD_HTTP_OK : MHD_HTTP_INTERNAL_SERVER_ERROR, resp);
     } else if (strcmp(url, ROUTE_PROCESSES_LIST) == 0) {
         char *resp_buf;
         struct MHD_Response *oom_resp = alloc_response_buffer(&resp_buf);

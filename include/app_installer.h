@@ -11,10 +11,10 @@ typedef enum PldmgrLauncherStatus {
     PLDMGR_LAUNCHER_FILES_READY = 3
 } PldmgrLauncherStatus;
 
-int pldmgr_install_app_if_needed(void);
 PldmgrLauncherStatus pldmgr_get_app_status(void);
 size_t pldmgr_get_app_status_json(char *buf, size_t size);
+
+int pldmgr_install_app_if_needed(void);
 int pldmgr_repair_app(void);
-int pldmgr_reinstall_app(void);
 
 #endif

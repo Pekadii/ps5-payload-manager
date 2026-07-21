@@ -24,6 +24,9 @@
  <img src="./pldmgr_screenshot3.png" width="600" />
 </p>
 
+# This is an unofficial community fork of itsPLK's PS5 Payload Manager. 
+- It is not maintained or supported by the upstream project.
+
 ## Features
 - **Web-Based Interface**: A modern dashboard to manage payloads from your PC, phone, or directly on the PS5.
 - **Import Payloads**: Easily add new payloads from a USB drive or download them from the integrated cloud repository.

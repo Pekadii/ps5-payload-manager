@@ -1,3 +1,6 @@
+![License](https://img.shields.io/badge/License-GPL-blue)
+![Development](https://img.shields.io/badge/Development-0.4.3-blue.svg)
+
 <p align="center">
  <img src="./assets/icon0.png" width="128" />
 </p>

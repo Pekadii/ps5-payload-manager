@@ -97,6 +97,90 @@ static int needs_update(const char *path, const uint8_t *expected_data,
   return mismatch != 0;
 }
 
+
+static const char *launcher_status_name(PldmgrLauncherStatus status) {
+  switch (status) {
+  case PLDMGR_LAUNCHER_MISSING: return "missing";
+  case PLDMGR_LAUNCHER_FILES_INCOMPLETE: return "incomplete";
+  case PLDMGR_LAUNCHER_FILES_OUTDATED: return "outdated";
+  case PLDMGR_LAUNCHER_FILES_READY: return "ready";
+  default: return "unknown";
+  }
+}
+
+PldmgrLauncherStatus pldmgr_get_app_status(void) {
+  struct stat st;
+  const char *base_dir = "/user/app/PLDM00001";
+  const char *param_path = "/user/app/PLDM00001/sce_sys/param.json";
+  const char *icon_path = "/user/app/PLDM00001/sce_sys/icon0.png";
+
+  if (stat(base_dir, &st) != 0 || !S_ISDIR(st.st_mode))
+    return PLDMGR_LAUNCHER_MISSING;
+  if (stat(param_path, &st) != 0 || stat(icon_path, &st) != 0)
+    return PLDMGR_LAUNCHER_FILES_INCOMPLETE;
+  if (needs_update(param_path, param_json, param_json_size) ||
+      needs_update(icon_path, icon0_png, icon0_png_size))
+    return PLDMGR_LAUNCHER_FILES_OUTDATED;
+  return PLDMGR_LAUNCHER_FILES_READY;
+}
+
+size_t pldmgr_get_app_status_json(char *buf, size_t size) {
+  PldmgrLauncherStatus status = pldmgr_get_app_status();
+  int param_ok = !needs_update("/user/app/PLDM00001/sce_sys/param.json",
+                               param_json, param_json_size);
+  int icon_ok = !needs_update("/user/app/PLDM00001/sce_sys/icon0.png",
+                              icon0_png, icon0_png_size);
+  int written = snprintf(buf, size,
+      "{\"title_id\":\"PLDM00001\",\"status\":\"%s\","
+      "\"files_ready\":%s,\"param_json\":%s,\"icon0_png\":%s,"
+      "\"registration\":\"unknown\","
+      "\"registration_note\":\"The available SDK API does not provide a reliable read-only registration query. Use repair if the icon is missing.\"}",
+      launcher_status_name(status),
+      status == PLDMGR_LAUNCHER_FILES_READY ? "true" : "false",
+      param_ok ? "true" : "false", icon_ok ? "true" : "false");
+  if (written < 0) return 0;
+  if ((size_t)written >= size) return size ? size - 1 : 0;
+  return (size_t)written;
+}
+
+int pldmgr_repair_app(void) {
+  /* Re-register even when the embedded files are already current. */
+  int err = sceAppInstUtilInitialize();
+  if (err) {
+    pldmgr_log("[PLDMGR] Launcher repair init failed: 0x%08X\n", err);
+    return -1;
+  }
+
+  if (pldmgr_get_app_status() != PLDMGR_LAUNCHER_FILES_READY) {
+    sceAppInstUtilTerminate();
+    return pldmgr_install_app_if_needed();
+  }
+
+  err = install_app("PLDM00001", "/user/app/");
+  sceAppInstUtilTerminate();
+  if (err) {
+    pldmgr_log("[PLDMGR] Launcher re-registration failed: 0x%08X\n", err);
+    pldmgr_notify("Payload Manager launcher repair failed");
+    return -1;
+  }
+  pldmgr_log("[PLDMGR] Launcher registration repair completed.\n");
+  pldmgr_notify("Payload Manager launcher repaired");
+  return 0;
+}
+
+int pldmgr_reinstall_app(void) {
+  int err = sceAppInstUtilInitialize();
+  if (err) return -1;
+  err = sceAppInstUtilAppUnInstall("PLDM00001");
+  sceAppInstUtilTerminate();
+  if (err)
+    pldmgr_log("[PLDMGR] Launcher uninstall returned 0x%08X; continuing.\n", err);
+
+  remove("/user/app/PLDM00001/sce_sys/param.json");
+  remove("/user/app/PLDM00001/sce_sys/icon0.png");
+  return pldmgr_install_app_if_needed();
+}
+
 int pldmgr_install_app_if_needed(void) {
   const char *title_id = "PLDM00001";
   char base_dir[256];

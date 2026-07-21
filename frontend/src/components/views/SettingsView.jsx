@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Terminal, ChevronRight, Globe, Languages } from 'lucide-react'
+import { Terminal, ChevronRight, Globe, Languages, Wrench } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { cn } from '../../utils/helpers'
+import LauncherManager from '../LauncherManager'
 
 const FOLLOW_BROWSER_LANGUAGE = '__auto__'
 
@@ -275,6 +276,16 @@ const SettingsView = ({ config, onSaveConfig, setShowLogs, onNavigate }) => {
             </button>
           )}
         </div>
+      </section>
+
+      {/* System Tools */}
+      <section className="space-y-8">
+        <h3 className="label-caps !text-ps-blue !opacity-100 flex items-center space-x-4 text-xl tracking-[0.2em]">
+          <Wrench className="w-6 h-6" />
+          <span>{t("settings.system_tools_title", "System Tools")}</span>
+        </h3>
+
+        <LauncherManager />
       </section>
 
       {/* Diagnostics */}

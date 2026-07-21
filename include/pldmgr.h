@@ -36,8 +36,11 @@
 
 #define ROUTE_PROCESSES_LIST "/processes_list"
 #define ROUTE_PROCESS_KILL "/process_kill"
+#define ROUTE_LAUNCHER_STATUS "/launcher_status"
+#define ROUTE_LAUNCHER_REPAIR "/launcher_repair"
+#define ROUTE_LAUNCHER_REINSTALL "/launcher_reinstall"
 
-#define MENU_VERSION "0.4.2"
+#define MENU_VERSION "0.4.3"
 #define AUTOLOAD_CONFIG_PATH "/data/pldmgr/autoload.txt"
 #define PLDMGR_CONFIG_PATH "/data/pldmgr/pldmgr_config.txt"
 #define REPOSITORY_CACHE_PATH "/data/pldmgr/repository_cache.json"

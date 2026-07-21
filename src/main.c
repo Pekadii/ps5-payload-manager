@@ -122,7 +122,13 @@ int main(int argc, char *argv[]) {
 
     /* Install app if requested */
     if (cfg.auto_install_app) {
-        pldmgr_install_app_if_needed();
+        int launcher_rc = pldmgr_install_app_if_needed();
+        if (launcher_rc == 0 &&
+            pldmgr_get_app_status() == PLDMGR_LAUNCHER_FILES_READY) {
+            config_upsert_value("AUTO_INSTALL_APP", "0");
+            cfg.auto_install_app = 0;
+            pldmgr_log("[PLDMGR] Launcher verified; AUTO_INSTALL_APP disabled.\n");
+        }
     }
 
     /* Kill Disc Player if running (BD-JB host) and enabled in config */

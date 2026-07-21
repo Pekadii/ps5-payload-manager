@@ -21,6 +21,7 @@
 #include "sources.h"
 #include "process_mgr.h"
 #include "ps5_launcher.h"
+#include "app_installer.h"
 
 #include "assets_index_html.h"
 #include "assets_cache_appcache.h"
@@ -122,6 +123,7 @@ static int is_noisy_route(const char *url) {
     if (strcmp(url, ROUTE_GET_CONFIG) == 0) return 1;
     if (strcmp(url, ROUTE_REPO_LIST) == 0) return 1;
     if (strcmp(url, ROUTE_PROCESSES_LIST) == 0) return 1;
+    if (strcmp(url, ROUTE_LAUNCHER_STATUS) == 0) return 1;
     if (strcmp(url, "/events") == 0) return 1;
     return 0;
 }
@@ -606,6 +608,33 @@ enum MHD_Result http_on_request(void *cls, struct MHD_Connection *conn,
         size_t len = payload_mgr_list_json(resp_buf, RESPONSE_BUFFER_SIZE);
         resp = MHD_create_response_from_buffer(len, (void *)resp_buf, MHD_RESPMEM_MUST_FREE);
         MHD_add_response_header(resp, "Content-Type", "application/json");
+    } else if (strcmp(url, ROUTE_LAUNCHER_STATUS) == 0) {
+        char json[1024];
+        size_t len = pldmgr_get_app_status_json(json, sizeof(json));
+        resp = MHD_create_response_from_buffer(len, (void *)json, MHD_RESPMEM_MUST_COPY);
+        MHD_add_response_header(resp, "Content-Type", "application/json");
+    } else if (strcmp(url, ROUTE_LAUNCHER_REPAIR) == 0) {
+        int rc = pldmgr_repair_app();
+        char json[256];
+        snprintf(json, sizeof(json),
+                 "{\"ok\":%s,\"action\":\"repair\",\"message\":\"%s\"}",
+                 rc == 0 ? "true" : "false",
+                 rc == 0 ? "Launcher repair completed" : "Launcher repair failed");
+        resp = MHD_create_response_from_buffer(strlen(json), (void *)json, MHD_RESPMEM_MUST_COPY);
+        MHD_add_response_header(resp, "Content-Type", "application/json");
+        add_cors_headers(resp);
+        return MHD_queue_response(conn, rc == 0 ? MHD_HTTP_OK : MHD_HTTP_INTERNAL_SERVER_ERROR, resp);
+    } else if (strcmp(url, ROUTE_LAUNCHER_REINSTALL) == 0) {
+        int rc = pldmgr_reinstall_app();
+        char json[256];
+        snprintf(json, sizeof(json),
+                 "{\"ok\":%s,\"action\":\"reinstall\",\"message\":\"%s\"}",
+                 rc == 0 ? "true" : "false",
+                 rc == 0 ? "Launcher reinstalled" : "Launcher reinstall failed");
+        resp = MHD_create_response_from_buffer(strlen(json), (void *)json, MHD_RESPMEM_MUST_COPY);
+        MHD_add_response_header(resp, "Content-Type", "application/json");
+        add_cors_headers(resp);
+        return MHD_queue_response(conn, rc == 0 ? MHD_HTTP_OK : MHD_HTTP_INTERNAL_SERVER_ERROR, resp);
     } else if (strcmp(url, ROUTE_PROCESSES_LIST) == 0) {
         char *resp_buf;
         struct MHD_Response *oom_resp = alloc_response_buffer(&resp_buf);

@@ -16,14 +16,6 @@
  <img src="./pldmgr_screenshot1.png" width="600" />
 </p>
 
-<p align="center">
- <img src="./pldmgr_screenshot2.png" width="600" />
-</p>
-
-<p align="center">
- <img src="./pldmgr_screenshot3.png" width="600" />
-</p>
-
 # This is an unofficial community fork of itsPLK's PS5 Payload Manager. 
 - It is not maintained or supported by the upstream project.
 

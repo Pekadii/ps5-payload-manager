@@ -17,7 +17,6 @@
 </p>
 
 # This is an unofficial community fork of itsPLK's PS5 Payload Manager. 
-- It is not maintained or supported by the upstream project.
 
 ## Features
 - **Web-Based Interface**: A modern dashboard to manage payloads from your PC, phone, or directly on the PS5.

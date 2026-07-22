@@ -13,16 +13,26 @@
 </p>
 
 <p align="center">
- <img src="./pldmgr_screenshot1.png" width="600" />
+  <a href="https://github.com/Pekadii/ps5-payload-manager/releases/tag/v0.4.3">
+    <img src="./pldmgr_screenshot1.png" width="600" />
+  </a>
+  <br><br>
+  <a href="https://github.com/Pekadii/ps5-payload-manager/releases/tag/v0.4.3">
+    <strong>Payload Manager v0.4.3</strong>
+  </a>
 </p>
 
-[Payload Manager v0.4.3](https://github.com/Pekadii/ps5-payload-manager/releases/tag/v0.4.3)
+<br>
 
 <p align="center">
- <img src="./ps5loader.png" width="600" />
+  <a href="https://github.com/Pekadii/ps5-payload-manager/releases/tag/v1.4.2">
+    <img src="./ps5loader.png" width="600" />
+  </a>
+  <br><br>
+  <a href="https://github.com/Pekadii/ps5-payload-manager/releases/tag/v1.4.2">
+    <strong>PS5 BD-JB Autoloader v1.4.2</strong>
+  </a>
 </p>
-
-[PS5 BD-JB Autoloader v1.4.2](https://github.com/Pekadii/ps5-payload-manager/releases/tag/v1.4.2)
 
 
 ## This is an unofficial community fork of itsPLK's PS5 Payload Manager. 

@@ -18,6 +18,10 @@
 
 [Payload Manager v0.4.3](https://github.com/Pekadii/ps5-payload-manager/releases/tag/v0.4.3)
 
+<p align="center">
+ <img src="./ps5loader.png" width="600" />
+</p>
+
 [PS5 BD-JB Autoloader v1.4.2](https://github.com/Pekadii/ps5-payload-manager/releases/tag/v1.4.2)
 
 

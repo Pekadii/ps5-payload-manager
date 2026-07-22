@@ -16,6 +16,11 @@
  <img src="./pldmgr_screenshot1.png" width="600" />
 </p>
 
+[Payload Manager v0.4.3](https://github.com/Pekadii/ps5-payload-manager/releases/tag/v0.4.3)
+
+[PS5 BD-JB Autoloader v1.4.2](https://github.com/Pekadii/ps5-payload-manager/releases/tag/v1.4.2)
+
+
 ## This is an unofficial community fork of itsPLK's PS5 Payload Manager. 
 
 ## Features
@@ -78,7 +83,7 @@ If you are using an older version and don't want to update the entire autoloader
 2. Add `pldmgr.elf` as the only entry in your `autoload.txt` config file.
 
 ### Standalone / Manual Loading
-You can also manually load the manager like any other `.elf` file. Grab the latest version from the [Releases](https://github.com/itsPLK/ps5-payload-manager/releases) page.
+You can also manually load the manager like any other `.elf` file. Grab the latest version from the [Releases](https://github.com/Pekadii/ps5-payload-manager/releases) page.
 
 ## Custom Repositories
 You can add third-party payload repositories to the manager. To learn how to create your own repository JSON and host it, see the [Custom Repositories Guide](CUSTOM_REPOSITORIES.md).

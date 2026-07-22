@@ -1,5 +1,6 @@
 ![License](https://img.shields.io/badge/License-GPL-blue)
 ![Development](https://img.shields.io/badge/Development-0.4.3-blue.svg)
+![Release](https://img.shields.io/badge/Release-Pldmgr%20v0.4.3-blue)
 
 <p align="center">
  <img src="./assets/icon0.png" width="128" />
@@ -21,19 +22,6 @@
     <strong>Payload Manager v0.4.3</strong>
   </a>
 </p>
-
-<br>
-
-<p align="center">
-  <a href="https://github.com/Pekadii/ps5-payload-manager/releases/tag/v1.4.2">
-    <img src="./ps5loader.png" width="600" />
-  </a>
-  <br><br>
-  <a href="https://github.com/Pekadii/ps5-payload-manager/releases/tag/v1.4.2">
-    <strong>PS5 BD-JB Autoloader v1.4.2</strong>
-  </a>
-</p>
-
 
 ## This is an unofficial community fork of itsPLK's PS5 Payload Manager. 
 

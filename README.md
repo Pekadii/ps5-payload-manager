@@ -23,7 +23,7 @@
   </a>
 </p>
 
-## This is an unofficial community fork of itsPLK's PS5 Payload Manager. 
+## Unofficial community fork of itsPLK's PS5 Payload Manager. 
 
 ## Features
 - **Web-Based Interface**: A modern dashboard to manage payloads from your PC, phone, or directly on the PS5.

@@ -18,8 +18,8 @@
     <img src="./pldmgr_screenshot1.png" width="600" />
   </a>
   <br><br>
-  <a href="https://github.com/Pekadii/ps5-payload-manager/releases/tag/v0.4.3">
-    <strong>Payload Manager v0.4.3</strong>
+  <a href="https://github.com/Pekadii/ps5-payload-manager/releases/tag/v0.5.0">
+    <strong>Payload Manager v0.5.0-Repair Pre-Release</strong>
   </a>
 </p>
 

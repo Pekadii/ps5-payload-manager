@@ -76,7 +76,7 @@ Verified functionality:
 ### Using an Autoloader (Recommended)
 It is highly recommended to use **Payload Manager** together with an **Autoloader**:
 
-[Y2JB](https://github.com/itsPLK/ps5-y2jb-autoloader) | [BD-JB](https://github.com/itsPLK/ps5-bdjb-autoloader) | [Lua](https://github.com/itsPLK/ps5-lua-autoloader)
+[Y2JB](https://github.com/itsPLK/ps5-y2jb-autoloader) | [BD-JB](https://github.com/pekadii/ps5-bdjb-autoloader) | [Lua](https://github.com/itsPLK/ps5-lua-autoloader)
 
 `pldmgr.elf` is already included as the default payload in the latest versions of the Autoloaders linked above.
 

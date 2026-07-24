@@ -1,5 +1,5 @@
 ![License](https://img.shields.io/badge/License-GPL-blue)
-![Development](https://img.shields.io/badge/Development-0.4.4-blue.svg)
+![Development](https://img.shields.io/badge/Development-0.5.0-blue.svg)
 ![Release](https://img.shields.io/badge/Release-Pldmgr%20v0.4.3-blue)
 
 <p align="center">

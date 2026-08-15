@@ -1,13 +1,11 @@
-## v0.5.0
+## v0.5.0-repair
 
 ### 🚀 Features & UX Improvements
-* **Payload Favorites / Pinning**: Added support for pinning favorite payloads to the top of the dashboard with a dedicated edit mode ([#65](https://github.com/itsPLK/ps5-payload-manager/pull/65), thanks to @techsociology).
-* **Payload Launch Indicator**: Introduced a visual checkmark indicator for payloads launched during the active session ([#44](https://github.com/itsPLK/ps5-payload-manager/issues/44)).
-* **New Languages**:
-  * **French** (thanks to Oblik20, Chronoss)
-  * **Japanese** (thanks to Jane101KR)
-  * **Korean** (thanks to Jane101KR)
 * **Translations**: Updated localization files across supported languages.
+* **System tools**: Repair app icon if missing or after rebuilding data base due to system error this repair is built inside payload manager.
+* **New Languages**:
+  * **Arabic** (thanks to mohamad.z.k28, abdoulacadat, DumDum143, HoussamLovy, c0ncerta, sgs2ofameer)
+  * **Thai** (thanks to Modmycon, hpokemon776)
 
 ### 🛠️ Backend & API Updates
 * **Launch History Tracking**: Added an in-memory session payload history manager and `/history_list` endpoint to track executed payloads.
